@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block title %}User Info{% endblock %}
+
+{% block content %}
+<h1>{{user.full_name()}}</h1>
+<ul>
+    {% for feedback in user.feedback %}
+    <li>
+        {{ feedback.title }}
+        <small>{{ feedback.content }}</small>
+    </li>
+    <form>
+        {{form.hidden_tag()}}
+        <button ormmethod="GET" formaction="/feedback/{{ feedback.id }}/update">Edit</button>
+       <button formmethod="POST" formaction="/feedback/{{ feedback.id }}/delete">Delete</button>
+    </form>
+{% endfor%}
+
+
+
+</ul>
+
+<p>
+    <a href="/users/{{ user.username }}/feedback/new" class="btn btn-primary">
+      Add feedback
+    </a>
+  </p>
+
+{% endblock %}
